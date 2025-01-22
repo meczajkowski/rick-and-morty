@@ -1,0 +1,25 @@
+.character-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 300px;
+  height: 100%;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  cursor: pointer;
+}
+
+.character-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.character-card__image {
+  width: 100%;
+}
+
+.character-card__caption {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
