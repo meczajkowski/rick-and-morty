@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCharacters } from "rickmortyapi";
 
-const useGetCharacters = () => {
+const useCharacters = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["characters"],
     queryFn: () => getCharacters(),
@@ -11,4 +11,4 @@ const useGetCharacters = () => {
   return { isPending, error, data, characters };
 };
 
-export default useGetCharacters;
+export default useCharacters;
