@@ -1,16 +1,16 @@
-import useCharacter from "../../../api/useCharacter";
 import "./CharacterDetails.css";
 import { Character } from "rickmortyapi";
 import { Link } from "react-router";
+import { useCharacterWithEpisodes } from "../../../api/useCharacterWithEpisodes";
 
 const CharacterDetails = ({
   characterId,
 }: {
   characterId: Character["id"];
 }) => {
-  const { isPending, error, character } = useCharacter(characterId);
+  const { isPending, error, character, episodes } =
+    useCharacterWithEpisodes(characterId);
 
-  console.log(character?.episode);
   if (isPending) {
     return (
       <section className="character-details">
@@ -84,6 +84,29 @@ const CharacterDetails = ({
             <p className="character-details__section-content">
               {character.gender}
             </p>
+          </section>
+
+          <section className="character-details__section">
+            <h2 className="character-details__section-title">Episodes:</h2>
+            {episodes ? (
+              <ul className="character-details__episodes-list">
+                {episodes.map((episode) => (
+                  <li
+                    key={episode.id}
+                    className="character-details__episode-item"
+                  >
+                    <span className="character-details__episode-code">
+                      {episode.episode}
+                    </span>
+                    {episode.name}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="character-details__episodes-list-empty">
+                No episodes found
+              </p>
+            )}
           </section>
         </figcaption>
       </figure>
