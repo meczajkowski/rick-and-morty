@@ -1,0 +1,15 @@
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main-layout__title {
+  height: 80px;
+
+  background-color: var(--background-color);
+}
+
+.main-layout__title img {
+  height: 100%;
+}

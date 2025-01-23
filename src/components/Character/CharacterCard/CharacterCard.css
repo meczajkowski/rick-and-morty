@@ -4,7 +4,6 @@
   background-color: var(--card-color);
   border-radius: var(--border-radius-default);
   padding: 1rem;
-  max-width: 300px;
   height: 100%;
   box-shadow: var(--box-shadow-default);
   cursor: pointer;
