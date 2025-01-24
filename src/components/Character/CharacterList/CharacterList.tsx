@@ -1,23 +1,37 @@
 import { Character } from "rickmortyapi";
 import CharacterCard from "../CharacterCard/CharacterCard";
-import useCharacters from "../../../api/useCharacters";
 import "./CharacterList.css";
+import CharacterListStatus from "./CharacterListStatus";
 
-const CharacterList = () => {
-  const { isPending, error, characters } = useCharacters();
+type CharacterListProps = {
+  characters: Character[];
+  searchQuery: string;
+  noResults: boolean;
+};
 
-  if (isPending) return "Loading...";
-  if (error) return "An error has occurred: " + error.message;
-
-  if (!characters) return <p>No characters found</p>;
+const CharacterList = ({
+  characters,
+  searchQuery,
+  noResults,
+}: CharacterListProps) => {
   return (
-    <ul className="character-list">
-      {characters.map((character: Character) => (
-        <li key={character.id}>
-          <CharacterCard character={character} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <CharacterListStatus />
+
+      {noResults ? (
+        <p className="character-list__no-results">
+          No characters found matching "{searchQuery}"
+        </p>
+      ) : (
+        <ul className="character-list">
+          {characters.map((character) => (
+            <li key={character.id}>
+              <CharacterCard character={character} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 

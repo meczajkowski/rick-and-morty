@@ -1,8 +1,18 @@
 .character-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 0 auto;
-  justify-content: center;
+}
+
+.character-list__no-results {
+  text-align: center;
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .character-list {
+    gap: 1rem;
+  }
 }
