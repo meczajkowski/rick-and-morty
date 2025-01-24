@@ -1,4 +1,4 @@
-import useCharacters from "../../../api/useCharacters";
+import useCharacters from "../../../api/hooks/queries/useCharacters";
 
 const CharacterListStatus = () => {
   const { isPending, error, characters } = useCharacters();

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Character, getEpisode } from "rickmortyapi";
 import useCharacter from "./useCharacter";
-import { getEpisodeIds } from "./helpers/getEpisodeIds";
+import { getEpisodeIds } from "../../helpers/getEpisodeIds";
 
 export const useCharacterWithEpisodes = (characterId: Character["id"]) => {
   const { data: characterData, isPending: isCharacterPending } =

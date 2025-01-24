@@ -1,17 +1,19 @@
 import { useState } from "react";
 import CharacterList from "../../components/Character/CharacterList/CharacterList";
 import SearchInput from "../../components/ui/SearchInput/SearchInput";
-import useFilteredCharacters from "../../api/useFilteredCharacters";
+import Pagination from "../../components/ui/Pagination/Pagination";
+import useFilteredCharacters from "../../api/hooks/useFilteredCharacters";
 import useSearchForm from "../../hooks/useSearchForm";
 import "./Home.css";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { characters, noResults } = useFilteredCharacters(searchQuery);
-
   const { searchValue, handleSubmit, handleChange } = useSearchForm({
     onSearch: setSearchQuery,
   });
+
+  const { characters, noResults, pagination } =
+    useFilteredCharacters(searchQuery);
 
   return (
     <>
@@ -28,6 +30,16 @@ function Home() {
         characters={characters}
         searchQuery={searchQuery}
         noResults={noResults}
+      />
+
+      <Pagination
+        currentPage={pagination.currentPage}
+        totalPages={pagination.totalPages}
+        hasNextPage={pagination.hasNextPage}
+        hasPrevPage={pagination.hasPrevPage}
+        onNextPage={pagination.onNextPage}
+        onPrevPage={pagination.onPrevPage}
+        onPageSelect={pagination.onPageSelect}
       />
     </>
   );

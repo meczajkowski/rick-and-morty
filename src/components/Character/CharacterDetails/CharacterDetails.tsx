@@ -1,13 +1,15 @@
 import "./CharacterDetails.css";
 import { Character } from "rickmortyapi";
-import { Link } from "react-router";
-import { useCharacterWithEpisodes } from "../../../api/useCharacterWithEpisodes";
+import { Link, useNavigate } from "react-router";
+import { useCharacterWithEpisodes } from "../../../api/hooks/queries/useCharacterWithEpisodes";
 
 const CharacterDetails = ({
   characterId,
 }: {
   characterId: Character["id"];
 }) => {
+  const navigate = useNavigate();
+
   const { isPending, error, character, episodes } =
     useCharacterWithEpisodes(characterId);
 
@@ -37,9 +39,12 @@ const CharacterDetails = ({
   return (
     <section className="character-details">
       <nav className="character-details__navigation">
-        <Link to="/" className="button character-details__back-button">
+        <button
+          onClick={() => navigate(-1)}
+          className="button character-details__back-button"
+        >
           ← Back
-        </Link>
+        </button>
       </nav>
 
       <figure className="character-details__content">
