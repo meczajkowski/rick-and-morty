@@ -3,32 +3,33 @@ import CharacterList from "../../components/Character/CharacterList/CharacterLis
 import SearchInput from "../../components/ui/SearchInput/SearchInput";
 import Pagination from "../../components/ui/Pagination/Pagination";
 import useFilteredCharacters from "../../api/hooks/useFilteredCharacters";
-import useSearchForm from "../../hooks/useSearchForm";
+import useDebounce from "../../hooks/useDebounce";
 import "./Home.css";
 
 function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const { searchValue, handleSubmit, handleChange } = useSearchForm({
-    onSearch: setSearchQuery,
+  const [searchValue, setSearchValue] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  useDebounce({
+    callback: () => setDebouncedQuery(searchValue),
+    delay: 500,
+    dependencyList: [searchValue],
   });
 
   const { characters, noResults, pagination } =
-    useFilteredCharacters(searchQuery);
+    useFilteredCharacters(debouncedQuery);
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="home__form">
-        <SearchInput
-          value={searchValue}
-          onChange={handleChange}
-          placeholder="Search characters..."
-        />
-        <button type="submit">Search</button>
-      </form>
+      <SearchInput
+        value={searchValue}
+        onChange={setSearchValue}
+        placeholder="Search characters..."
+      />
 
       <CharacterList
         characters={characters}
-        searchQuery={searchQuery}
+        searchQuery={debouncedQuery}
         noResults={noResults}
       />
 
