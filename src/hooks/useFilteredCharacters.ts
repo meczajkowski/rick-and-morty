@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Character } from "rickmortyapi";
-import useCharacters from "./useCharacters";
+import useCharacters from "../api/hooks/queries/useCharacters";
 
 const filterCharacters = (characters: Character[], query: string) => {
   if (!query.trim()) return characters;
@@ -9,7 +10,8 @@ const filterCharacters = (characters: Character[], query: string) => {
   );
 };
 
-const useFilteredCharacters = (searchQuery: string) => {
+const useFilteredCharacters = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const { characters, isPending, error } = useCharacters();
 
   const filteredCharacters = characters
@@ -20,6 +22,8 @@ const useFilteredCharacters = (searchQuery: string) => {
     characters: filteredCharacters,
     isPending,
     error,
+    searchQuery,
+    setSearchQuery,
     noResults: (characters && filteredCharacters.length === 0) || false,
   };
 };

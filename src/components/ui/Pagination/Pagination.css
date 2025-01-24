@@ -1,0 +1,17 @@
+.pagination {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+.pagination__pages {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.pagination__page--active {
+  background: var(--button-active-color);
+}

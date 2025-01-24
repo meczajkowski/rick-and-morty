@@ -1,7 +1,7 @@
 import "./CharacterDetails.css";
 import { Character } from "rickmortyapi";
 import { Link } from "react-router";
-import { useCharacterWithEpisodes } from "../../../api/useCharacterWithEpisodes";
+import { useCharacterWithEpisodes } from "../../../api/hooks/queries/useCharacterWithEpisodes";
 
 const CharacterDetails = ({
   characterId,
